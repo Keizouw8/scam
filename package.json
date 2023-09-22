@@ -1,0 +1,21 @@
+{
+  "name": "scam-server",
+  "version": "1.0.0",
+  "description": "secure chat app madum",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keizouw8/scam-server.git"
+  },
+  "keywords": [
+    "secure",
+    "messaging"
+  ],
+  "author": "Keizou Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Keizouw8/scam-server/issues"
+  },
+  "homepage": "https://github.com/Keizouw8/scam-server#readme"
+}
