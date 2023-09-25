@@ -1,12 +1,15 @@
 {
-  "name": "scam-server",
+  "name": "scam",
   "version": "1.0.0",
   "description": "secure chat app madum",
   "main": "index.js",
   "scripts": {},
+  "bin": {
+    "scam": "./bin/main.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Keizouw8/scam-server.git"
+    "url": "git+https://github.com/Keizouw8/scam.git"
   },
   "keywords": [
     "secure",
@@ -15,10 +18,11 @@
   "author": "Keizou Wang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Keizouw8/scam-server/issues"
+    "url": "https://github.com/Keizouw8/scam/issues"
   },
-  "homepage": "https://github.com/Keizouw8/scam-server#readme",
+  "homepage": "https://github.com/Keizouw8/scam#readme",
   "dependencies": {
+    "commander": "^11.0.0",
     "object-hash": "^3.0.0",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
