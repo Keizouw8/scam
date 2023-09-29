@@ -11,6 +11,7 @@ module.exports = function(options){
 	};
 	
 	var client = new Client(options.client, { auth });
+
 	client.on("verified", function(verified){
 		if(!verified){
 			console.error("unable to verify");
@@ -18,5 +19,9 @@ module.exports = function(options){
 		}
 
 		console.log("connected to server with id", client.id);
+	});
+
+	client.on("message", function(msg){
+		console.log(`${msg.from} ${msg.verify()}: ${msg.decrypted}`)
 	});
 }
