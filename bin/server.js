@@ -24,5 +24,5 @@ module.exports = function(options){
 }
 
 function app(_, res){
-	res.write("scam messaging server");
+	res.end("scam messaging server");
 }
