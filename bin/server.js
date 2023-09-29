@@ -7,8 +7,8 @@ module.exports = function(options){
     var server;
 	if(options.private && options.public){
 		server = https.createServer(app, {
-			key: fs.readFileSync(options.private),
-			cert: fs.readFileSync(options.public)
+			key: options.private,
+			cert: options.public
 		});
 	}else{
 		server = http.createServer(app);
