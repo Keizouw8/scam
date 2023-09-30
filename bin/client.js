@@ -33,12 +33,12 @@ module.exports = function(options){
 			process.exit();
 		}
 
-		console.log(kleur.blue().bold("Connected to server with id:"), kleur.italic(client.id));
+		console.log(kleur.blue().bold("Connected to server with id:"), kleur.italic(client.id), `\n${kleur.bold().green("<to>:")} ${kleur.italic("<message>")}`);
 
 		function request(){
-			readline.question(`${kleur.bold().green("<to>:")} ${kleur.italic("<message>")}\n`, function(res){
+			readline.question("", function(res){
 				if(!res.includes(": ")){
-					console.log(characters.warning, kleur.yellow("Incorrect message format"));
+					console.log(`${characters.warning} ${kleur.yellow("Incorrect message format")}\n${kleur.bold().green("<to>:")} ${kleur.italic("<message>")}`);
 					return request();
 				}
 
