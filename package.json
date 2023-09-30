@@ -1,7 +1,7 @@
 {
   "name": "scam-msg",
   "version": "1.0.0",
-  "description": "secure chat app madum",
+  "description": "(S)ecure (C)hat (A)pp (M)adum",
   "main": "index.js",
   "scripts": {},
   "bin": {
