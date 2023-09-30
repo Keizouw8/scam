@@ -37,6 +37,11 @@ module.exports = function(options){
 
 		function request(){
 			readline.question(`${kleur.bold().green("<to>:")} ${kleur.italic("<message>")}\n`, function(res){
+				if(!res.includes(": ")){
+					console.log(characters.warning, kleur.yellow("Incorrect message format"));
+					return request();
+				}
+
 				var message = res.slice(res.indexOf(": ") + 1).trim();
 				var to = res.slice(0, res.indexOf(": ")).trim();
 			
