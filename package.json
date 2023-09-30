@@ -1,5 +1,5 @@
 {
-  "name": "scam",
+  "name": "scam-msg",
   "version": "1.0.0",
   "description": "secure chat app madum",
   "main": "index.js",
@@ -23,6 +23,8 @@
   "homepage": "https://github.com/Keizouw8/scam#readme",
   "dependencies": {
     "commander": "^11.0.0",
+    "is-unicode-supported": "^1.3.0",
+    "kleur": "^4.1.5",
     "object-hash": "^3.0.0",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
