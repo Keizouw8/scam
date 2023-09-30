@@ -1,5 +1,20 @@
 const crypto = require("crypto");
 const { Client } = require("../");
+const kleur = require("kleur");
+
+const readline = require("readline").createInterface({
+	input: process.stdin,
+	output: process.stdout,
+	terminal: false
+});
+
+var characters;
+import("is-unicode-supported").then(function(unicode){
+	characters = {
+		check: unicode ? kleur.green("✔") : kleur.green("√"),
+		warning: unicode ? kleur.yellow("⚠") : kleur.yellow("!!")
+	};
+});
 
 module.exports = function(options){
 	if(!(options.private && options.public))
@@ -18,10 +33,22 @@ module.exports = function(options){
 			process.exit();
 		}
 
-		console.log("connected to server with id", client.id);
+		console.log(kleur.blue().bold("Connected to server with id:"), kleur.italic(client.id));
+
+		function request(){
+			readline.question(`${kleur.bold().green("<to>:")} ${kleur.italic("<message>")}\n`, function(res){
+				var message = res.slice(res.indexOf(": ") + 1).trim();
+				var to = res.slice(0, res.indexOf(": ")).trim();
+			
+				client.send(to, Buffer.from(message));
+				request();
+			});
+		}
+
+		request();
 	});
 
 	client.on("message", function(msg){
-		console.log(`${msg.from} ${msg.verify()}: ${msg.decrypted}`)
+		console.log(msg.verify() ? characters.check : characters.warning, kleur.green().bold(msg.from) + kleur.green().bold(`:`), msg.decrypted.toString())
 	});
 }
