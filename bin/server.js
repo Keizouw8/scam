@@ -1,7 +1,7 @@
 const { Server } = require("../");
+const kleur = require("kleur");
 const https = require("https");
 const http = require("http");
-const fs = require("fs");
 
 module.exports = function(options){
     var server;
@@ -15,11 +15,11 @@ module.exports = function(options){
 	}
 
 	var port = parseInt(options.server);
-	server.listen(port, console.log("Listening on port", port));
+	server.listen(port, console.log(kleur.grey().italic(`Listening on port ${port}`)));
 
 	var scam = new Server(server);
 	scam.on("connection", function(user){
-		console.log("User joined with id:", user.id);
+		console.log(kleur.bold().blue("User joined with id:"), kleur.italic(user.id));
 	});
 }
 
