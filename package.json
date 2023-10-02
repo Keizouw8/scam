@@ -4,6 +4,7 @@
   "description": "(S)ecure (C)hat (A)pp (M)adum",
   "main": "index.js",
   "scripts": {},
+  "type": "module",
   "bin": {
     "scam": "./bin/main.js"
   },
@@ -27,6 +28,7 @@
     "kleur": "^4.1.5",
     "object-hash": "^3.0.0",
     "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2"
+    "socket.io-client": "^4.7.2",
+    "string-width": "^6.1.0"
   }
 }

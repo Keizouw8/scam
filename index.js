@@ -1,4 +1,4 @@
-const Server = require("./lib/server");
-const Client = require("./lib/client");
+import Server from "./lib/server.js";
+import Client from "./lib/client.js";
 
-module.exports = { Server, Client };
+export { Server, Client };

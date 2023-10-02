@@ -1,15 +1,13 @@
 #! /usr/bin/env node
 
-const package = require('../package.json');
-const { program } = require("commander");
-const server = require("./server");
-const client = require("./client");
-const crypto = require("crypto");
-const fs = require("fs");
+import { program } from "commander";
+import server from "./server.js";
+import client from "./client.js";
+import crypto from "crypto";
+import fs from "fs";
 
 program
 	.name("scam")
-	.version(package.version)
 	.option("-s, --server <port>", "create a server")
 	.option("-c, --client <url>", "create a client")
 	.option("--private <path>")
@@ -28,7 +26,10 @@ if(options.genKeys){
 	options.public = keys.publicKey.export({type: "pkcs1", format: "pem"});
 }
 
-if(options.server) return server(options);
-if(options.client) return client(options);
-
-console.error("error: server or client not defined")
+if(options.server){
+	server(options);
+}else if(options.client){
+	client(options);
+}else{
+	console.error("error: server or client not defined");
+}
