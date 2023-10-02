@@ -199,7 +199,7 @@ export default function(options){
 			if(verified){
 				message += kleur.green().bold(`${characters.check} ${msg.from}${msg.from == client.id ? " (you)" : ""}: `);
 			}else{
-				message += kleur.yellow().bold(`${characters.warning} `) + kleur.red().bold(`${msg.from}: `);
+				message += kleur.yellow().bold(`${characters.warning} ${msg.from}: `);
 			}
 			message += msg.decrypted.toString();
 			messages.push(message);
