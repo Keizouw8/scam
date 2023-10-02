@@ -31,6 +31,12 @@ String.prototype.insert = function(i, string){
 };
 
 export default function(options){
+	if(options.genKeys){
+		var keys = crypto.generateKeyPairSync("rsa", { modulusLength: 2048 });
+		options.private = keys.privateKey.export({type: "pkcs1", format: "pem"});
+		options.public = keys.publicKey.export({type: "pkcs1", format: "pem"});
+	}
+	
 	if(!(options.private && options.public))
 		return console.error("error: public or private key not defined. use --private and --public to configure");
 	

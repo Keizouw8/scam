@@ -20,11 +20,6 @@ program.parse();
 var options = program.opts();
 if(options.private) options.private = fs.readFileSync(options.private);
 if(options.public) options.public = fs.readFileSync(options.public);
-if(options.genKeys){
-	var keys = crypto.generateKeyPairSync("rsa", { modulusLength: 2048 });
-	options.private = keys.privateKey.export({type: "pkcs1", format: "pem"});
-	options.public = keys.publicKey.export({type: "pkcs1", format: "pem"});
-}
 
 if(options.server){
 	server(options);
