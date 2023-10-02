@@ -134,6 +134,8 @@ export default function(options){
 			draw();
 		});
 
+		process.stdout.on("resize", draw);
+
 		draw();
 
 		function draw(){
@@ -189,12 +191,14 @@ export default function(options){
 			var verified = msg.verify();
 			var message = "";
 			if(verified){
-				message += kleur.green().bold(`${characters.check} ${msg.from}: `);
+				message += kleur.green().bold(`${characters.check} ${msg.from}${msg.from == client.id ? " (you)" : ""}: `);
 			}else{
 				message += kleur.yellow().bold(`${characters.warning} `) + kleur.red().bold(`${msg.from}: `);
 			}
 			message += msg.decrypted.toString();
 			messages.push(message);
+
+			if(text.message == "") text.to = msg.from;
 			draw();
 		});
 
