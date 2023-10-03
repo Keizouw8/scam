@@ -99,13 +99,25 @@ export default function(options){
 				}else{
 					client.send(text.to, Buffer.from(text.message)).catch(function(err){
 						error = err.toString().split("\n")[0];
-					}).then(function(err, succ){
+					}).then(function(err, msg){
+						console.log(msg);
 						if(err){
 							error = err.toString().split("\n")[0];
 						}else{
 							text.message = "";
 							cursorPos = 0;
 							offset = 0;
+
+							// var verified = msg.verify();
+							// var message = "";
+							// if(verified){
+							// 	message += kleur.green().bold(`${characters.check} ${msg.from}${msg.from == client.id ? " (me)" : ""}: `);
+							// }else{
+							// 	message += kleur.yellow().bold(`${characters.warning} ${msg.from}: `);
+							// }
+
+							// message += msg.decrypted.toString();
+							// messages.push(message);
 						}
 						draw();
 					});
@@ -194,10 +206,11 @@ export default function(options){
 		}
 
 		client.on("message", function(msg){
+			// if(msg.to == client.id) return;
 			var verified = msg.verify();
 			var message = "";
 			if(verified){
-				message += kleur.green().bold(`${characters.check} ${msg.from}${msg.from == client.id ? " (you)" : ""}: `);
+				message += kleur.green().bold(`${characters.check} ${msg.from}${msg.from == client.id ? " (me)" : ""}: `);
 			}else{
 				message += kleur.yellow().bold(`${characters.warning} ${msg.from}: `);
 			}
