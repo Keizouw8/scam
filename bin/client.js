@@ -62,8 +62,8 @@ export default function(options){
 	var client = new Client(options.client, { auth });
 
 	client.on("verified", function(verified){
-		var focus = "to";
-		var text = { to: "", message: "" }
+		var focus = "message";
+		var text = { to: client.id, message: "" }
 		var cursorPos = 0;
 		var offset = 0;
 		var error = false;
@@ -97,28 +97,24 @@ export default function(options){
 					offset = 0;
 					cursorPos = 0;
 				}else{
-					client.send(text.to, Buffer.from(text.message)).catch(function(err){
-						error = err.toString().split("\n")[0];
-					}).then(function(err, msg){
-						console.log(msg);
-						if(err){
-							error = err.toString().split("\n")[0];
-						}else{
+					client.send(text.to, Buffer.from(text.message)).then(function(msg){
 							text.message = "";
 							cursorPos = 0;
 							offset = 0;
+							
+							var verified = msg.verify();
+							var message = "";
+							if(verified){
+								message += kleur.green().bold(`${characters.check} ${msg.from}${msg.from == client.id ? " (me)" : ""}: `);
+							}else{
+								message += kleur.yellow().bold(`${characters.warning} ${msg.from}: `);
+							}
 
-							// var verified = msg.verify();
-							// var message = "";
-							// if(verified){
-							// 	message += kleur.green().bold(`${characters.check} ${msg.from}${msg.from == client.id ? " (me)" : ""}: `);
-							// }else{
-							// 	message += kleur.yellow().bold(`${characters.warning} ${msg.from}: `);
-							// }
-
-							// message += msg.decrypted.toString();
-							// messages.push(message);
-						}
+							message += msg.decrypted.toString();
+							messages.push(message);
+							draw();
+					}).catch(function(err){
+						error = err.toString().split("\n")[0];
 						draw();
 					});
 				}
@@ -206,7 +202,7 @@ export default function(options){
 		}
 
 		client.on("message", function(msg){
-			// if(msg.to == client.id) return;
+			if(msg.to == client.id) return;
 			var verified = msg.verify();
 			var message = "";
 			if(verified){
